@@ -22,8 +22,8 @@ OUT SPL,R16
 LDI R17,HIGH (RAMEND)
 OUT SPH, R17
 .DEF count=R18
-.DEF but1=R19
-.DEF but2=R20
+.DEF but1=R16
+.DEF but2=R16
 //*******************************************************************
 //CONFIGURACION
 //*******************************************************************
@@ -33,32 +33,31 @@ setup:
 	STS CLKPR,R16 //habilitando prescaler
 
 	LDI R16, 0b0000_0100
-	STS CLKPR,R16
+	STS CLKPR,R16*/
 
 	LDI R16, 0b0001_1111
 	OUT DDRC, R16 //Set PORTC as input
 
 	LDI R16, 0b0000_0000//Configura el puerto D (LEDS) como salida
 	OUT DDRD,R16
-*/
 
-	LDI count, 0b000
+	LDI count, 0b0000
 	OUT DDRD, count
 
 loop:
 	
-	//IN but1, PC0
+	IN but1, PORTC//PORTC=1
 	//SBRS R16,PC0;salta si alguno de los botones no esta presionado
 	//RJMP delaybounce
 
-	CPI but1,0//si lee esto, entonces esta presionando el boton de incrementar contador
+	CPI but1,0b0001//si lee esto, entonces esta presionando el boton de incrementar contador
 	BREQ incr // manda a llamar a la fuincion incr-->incrementa el contador
 	
-	IN but2, PC1 // compara la entrada del pinA, si es el segundo entonces lo asigna a b2
+	IN but2, PORTC // compara la entrada del pinA, si es el segundo entonces lo asigna a b2
 	//SBRS R16,PC1 ;salta si alguno de los botones no esta presionado
 	//RJMP delaybounce
 
-	CPI but2,0// decrece el contador porque el boton está presionado
+	CPI but2,0b0010// decrece el contador porque el boton está presionado
 	BREQ decr// manda a llamar a la funcion decr--> disminuye el contador
 
 	RJMP loop//ciclo
