@@ -23,10 +23,14 @@
   <FILE>prelab_1_count.lss</FILE>
  </OUTPUT_FILES>
  <LABELS>
-  <setup><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>30</LINE></setup>
-  <loop><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>47</LINE></loop>
-  <incr><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>65</LINE></incr>
-  <decr><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>73</LINE></decr>
-  <reset><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>81</LINE></reset>
+  <setup><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>35</LINE></setup>
+  <loop><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>55</LINE></loop>
+  <incr><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>93</LINE></incr>
+  <decr><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>102</LINE></decr>
+  <incr2><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>111</LINE></incr2>
+  <decr2><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>120</LINE></decr2>
+  <suma><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>129</LINE></suma>
+  <reset><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>146</LINE></reset>
+  <overflow><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>138</LINE></overflow>
  </LABELS>
 </ASSEMBLER_INFO>
