@@ -52,6 +52,8 @@ setup:
 	LDI count2, 0b0000
 	OUT DDRD, count
 
+	LDI r21,0b0000_0000
+	LDI r22,0b0000_0000
 loop:
 	//PRIMER CONTADOR
 	IN but1, PORTC//PORTC=1
@@ -95,17 +97,29 @@ incr: //funcion suma
 	CPI count,0b0001_0000 //verifica si hay overflow
 	//aqui deberia de añadir un carryflag
 	BREQ reset // si existe un overflow resetea el contador
-	OUT PORTD,count// muestra el valor del contador
 	MOV r21,count
+	CALL mostrar
+	;OUT PORTD,count// muestra el valor del contador
 	RJMP loop//regresa al loop
+
+mostrar:
+	LSL r22
+	LSL r22
+	LSL r22
+	LSL r22
+	OR r21,r22
+	OUT PORTD,r21
+	//juntar bits de r22 y r21 y as´´i poder hacer un número de 8 bits
+	RET
 
 decr:
 	DEC count// le resta -1 al contador
 	CPI count,0b0000 //compara si el contador es igial a 0
 	//aqui deberia de añadir un zeroflag
 	BREQ reset//reinicia el contador a 0
-	OUT PORTD,count// muestra el contador
 	MOV r21,count
+	CALL mostrar
+	;OUT PORTD,count// muestra el contador
 	RJMP loop//regresa el ciclo inicial
 
 incr2: //funcion suma
@@ -113,8 +127,9 @@ incr2: //funcion suma
 	CPI count2,0b0001_0000 //verifica si hay overflow
 	//aqui deberia de añadir un carryflag
 	BREQ reset // si existe un overflow resetea el contador
-	OUT PORTD,count2// muestra el valor del contador
 	MOV r22,count2
+	CALL mostrar
+	;OUT PORTD,count2// muestra el valor del contador
 	RJMP loop//regresa al loop
 
 decr2:
@@ -122,8 +137,9 @@ decr2:
 	CPI count2,0b0000 //compara si el contador es igial a 0
 	//aqui deberia de añadir un zeroflag
 	BREQ reset//reinicia el contador a 0
-	OUT PORTD,count2// muestra el contador
 	MOV r22,count2
+	Call mostrar
+	;OUT PORTD,count2// muestra el contador
 	RJMP loop//regresa el ciclo inicial
 
 suma:

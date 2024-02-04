@@ -1,5 +1,5 @@
 
-AVRASM ver. 2.2.8  C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm Sun Feb 04 16:30:58 2024
+AVRASM ver. 2.2.8  C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm Sun Feb 04 17:27:12 2024
 
 
 EQU  SIGNATURE_000 0000001e
@@ -704,11 +704,12 @@ DEF  but3         r16
 DEF  but4         r16
 DEF  but5         r16
 CSEG setup        00000004
-CSEG loop         0000000c
-CSEG incr         0000001c
-CSEG decr         00000022
-CSEG incr2        00000028
-CSEG decr2        0000002e
-CSEG suma         00000034
-CSEG reset        0000003f
-CSEG overflow     0000003a
+CSEG loop         0000000e
+CSEG incr         0000001e
+CSEG decr         0000002c
+CSEG incr2        00000032
+CSEG decr2        00000039
+CSEG suma         0000003f
+CSEG reset        0000004a
+CSEG mostrar      00000025
+CSEG overflow     00000045
