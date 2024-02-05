@@ -65,6 +65,7 @@ loop:
 	SBRS r16,PC1 
 	RJMP btn2
 
+	//SEGUNDO CONTADOR
 	IN r16, PINC//PinC presionado o no
 	SBRS r16,PC2
 	RJMP btn3
@@ -73,19 +74,22 @@ loop:
 	SBRS r16,PC3 
 	RJMP btn4
 
+	//SUMA DE CONTADORES
 	IN r16, PINC//PinC presionado o no
 	SBRS r16,PC4
 	RJMP btn5
 
 	RJMP loop//ciclo
 
+//BOTONES
 btn1:
 	NOP
-	CALL delaybounce
+	CALL delaybounce//espera a que el botón no esté presionado, de lo contrario sigue con el resto
 	SBIS PINC, PC0
 	JMP btn1
-	RJMP incr
+	RJMP incr //llama a etiqueta de incrementar contador
 
+;realiza la misma función con el retso de botones
 btn2:
 	NOP
 	CALL delaybounce
@@ -114,6 +118,7 @@ btn5:
 	JMP btn5
 	RJMP suma
 
+//DELAY para esperar a que no se tomen más clicks de los necesarios
 delaybounce:
 	LDI r16,100
 	delay:
@@ -124,28 +129,15 @@ delaybounce:
 incr: //funcion suma
 	INC count // le suma +1 al contador
 	CPI count,0b0001_0000 //verifica si hay overflow
-	//aqui deberia de añadir un carryflag
 	BREQ reset // si existe un overflow resetea el contador
 	MOV r21,count
 	CALL mostrar
 	;OUT PORTD,count// muestra el valor del contador
 	RJMP loop//regresa al loop
 
-mostrar:
-	ANDI r21,0b0000_1111
-	LSL r22
-	LSL r22
-	LSL r22
-	LSL r22
-	OR r21,r22
-	OUT PORTD,r21
-	//juntar bits de r22 y r21 y as´´i poder hacer un número de 8 bits
-	RET
-
 decr:
 	DEC count// le resta -1 al contador
 	CPI count,0xFF //compara si el contador es igial a 0
-	//aqui deberia de añadir un zeroflag
 	BREQ reset//reinicia el contador a 0
 	MOV r21,count
 	CALL mostrar
@@ -155,7 +147,6 @@ decr:
 incr2: //funcion suma
 	INC count2 // le suma +1 al contador
 	CPI count2,0b0001_0000 //verifica si hay overflow
-	//aqui deberia de añadir un carryflag
 	BREQ reset // si existe un overflow resetea el contador
 	MOV r22,count2
 	CALL mostrar
@@ -165,7 +156,6 @@ incr2: //funcion suma
 decr2:
 	DEC count2// le resta -1 al contador
 	CPI count2,0xFF //compara si el contador es igial a 0
-	//aqui deberia de añadir un zeroflag
 	BREQ reset//reinicia el contador a 0
 	MOV r22,count2
 	Call mostrar
@@ -181,11 +171,23 @@ suma:
 	RJMP loop
 	//BRVS overflow //BRVS-->salta si hay un overflow
 
+//La siguiente función permite que se muestren los valores de contador 1 y 2 juntos
+mostrar:
+	ANDI r21,0b0000_1111 //revisa que r21 tenga los valores reales del contador 1
+	LSL r22
+	LSL r22
+	LSL r22
+	LSL r22//mueve los bits a la izquierda 4 veces
+	OR r21,r22//junta ambos contadores
+	OUT PORTD,r21//muestra ambos contadores
+	//juntar bits de r22 y r21 y as´´i poder hacer un número de 8 bits
+	RET 
+
 overflow:
 	LDI r16,0b0000_1111
-	AND r16,r21
-	ORI r16,0b00001_0000
-	OUT PORTB,r16
+	AND r16,r21//deja los bits menos significativos
+	ORI r16,0b00001_0000//añade un bit en cuarta posición para prender el led de overflow
+	OUT PORTB,r16//muestra r16
 	RJMP loop
 	//encender led de overflow y presentar los bits menos significativos de la suma
 
@@ -194,23 +196,5 @@ reset:
 	OUT PORTD, count
 	RJMP loop
 
-/*delaybounce:
-	LDI R16,100
-	delay:
-		DEC R16
-		BRNE delay
-	
-	SBIS PORTC,PC0
-	RJMP delaybounce
-
-	SBIS PORTC,PC1
-	RJMP delaybounce
-
-	SBI PORTD,PD0
-	SBI PORTD,PD1
-	SBI PORTD,PD2
-	SBI PORTD,PD3
-
-	RJMP loop*/
 
 
