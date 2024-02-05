@@ -33,18 +33,48 @@ OUT SPH, R17
 //CONFIGURACION
 //*******************************************************************
 setup:
-/*
+	//RELOJ
 	LDI R16, (1<<CLKPCE)
 	STS CLKPR,R16 //habilitando prescaler
 
-	LDI R16, 0b0000_0100
-	STS CLKPR,R16*/
+	LDI R16, 0b0000_0100 //definciendo frecuencia de 1MHz
+	STS CLKPR,R16
 
-	LDI R16, 0b0001_1111
+	LDI r16, (1<<PC0)
+	OUT PORTC,r16
+	CBI DDRC, PC0 ;Configura el pin PC0/A0 como entrada
+	/*
+	LDI r16, (1<<PC1)
+	OUT PORTC,r16
+	CBI DDRC, PC1 ;Configura el pin PC1/A1 como entrada
+
+	LDI r16, (1<<PC2)
+	OUT PORTC,r16
+	CBI DDRC, PC2 ;Configura el pin PC2/A2 como entrada
+
+	LDI r16, (1<<PC0)
+	OUT PORTC,r16
+	CBI DDRC, PC0 ;Configura el pin PC0/A0 como entrada*/
+
+	LDI r16, (1<<PD0)
+	OUT DDRD,r16 ;Configuro el pin PD0 como salida
+
+	LDI r16, (1<<PD1)
+	OUT DDRD,r16 ;Configuro el pin PD1 como salida
+
+	LDI r16, (1<<PD2)
+	OUT DDRD,r16 ;Configuro el pin PD2 como salida
+
+	LDI r16, (1<<PD3)
+	OUT DDRD,r16 ;Configuro el pin PD3 como salida
+
+
+	//MI PROGRA
+	/*LDI R16, 0b0001_1111
 	OUT DDRC, R16 //Set PORTC as input
 
 	LDI R16, 0b0000_0000//Configura el puerto D (LEDS) como salida
-	OUT DDRD,R16
+	OUT DDRD,R16*/
 
 	LDI count, 0b0000
 	OUT DDRD, count
@@ -56,9 +86,11 @@ setup:
 	LDI r22,0b0000_0000
 loop:
 	//PRIMER CONTADOR
-	IN but1, PORTC//PORTC=1
-	//SBRS R16,PC0;salta si alguno de los botones no esta presionado
-	//RJMP delaybounce
+	IN r16, PORTC//PORTC=1
+	SBRS r16,PC0 
+	RJMP delaybounce
+
+	RJMP loop
 
 	CPI but1,0b0001//si lee esto, entonces esta presionando el boton de incrementar contador
 	BREQ incr // manda a llamar a la fuincion incr-->incrementa el contador
@@ -91,6 +123,17 @@ loop:
 
 
 	RJMP loop//ciclo
+delaybounce:
+	LDI r16,100
+	delay:
+		DEC r16
+		BRNE delay
+
+	SBIS PINC,PC0
+	RJMP delaybounce
+
+	SBI PIND,PD0
+	RJMP loop
 
 incr: //funcion suma
 	INC count // le suma +1 al contador

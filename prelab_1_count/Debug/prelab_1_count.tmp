@@ -24,14 +24,16 @@
  </OUTPUT_FILES>
  <LABELS>
   <setup><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>35</LINE></setup>
-  <loop><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>57</LINE></loop>
-  <incr><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>95</LINE></incr>
-  <decr><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>115</LINE></decr>
-  <incr2><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>124</LINE></incr2>
-  <decr2><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>134</LINE></decr2>
-  <suma><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>143</LINE></suma>
-  <reset><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>160</LINE></reset>
-  <mostrar><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>105</LINE></mostrar>
-  <overflow><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>152</LINE></overflow>
+  <loop><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>87</LINE></loop>
+  <delaybounce><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>126</LINE></delaybounce>
+  <incr><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>138</LINE></incr>
+  <decr><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>158</LINE></decr>
+  <incr2><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>168</LINE></incr2>
+  <decr2><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>178</LINE></decr2>
+  <suma><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>188</LINE></suma>
+  <delay><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>128</LINE></delay>
+  <reset><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>205</LINE></reset>
+  <mostrar><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>148</LINE></mostrar>
+  <overflow><FILE>C:\Users\lefaj\Documents\Atmel Studio\7.0\prelab_1_count\Laboratorio1_PM\prelab_1_count\main.asm</FILE><LINE>197</LINE></overflow>
  </LABELS>
 </ASSEMBLER_INFO>
