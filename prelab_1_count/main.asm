@@ -40,100 +40,86 @@ setup:
 	LDI R16, 0b0000_0100 //definciendo frecuencia de 1MHz
 	STS CLKPR,R16
 
-	LDI r16, (1<<PC0)
-	OUT PORTC,r16
-	CBI DDRC, PC0 ;Configura el pin PC0/A0 como entrada
-	/*
-	LDI r16, (1<<PC1)
-	OUT PORTC,r16
-	CBI DDRC, PC1 ;Configura el pin PC1/A1 como entrada
-
-	LDI r16, (1<<PC2)
-	OUT PORTC,r16
-	CBI DDRC, PC2 ;Configura el pin PC2/A2 como entrada
-
-	LDI r16, (1<<PC0)
-	OUT PORTC,r16
-	CBI DDRC, PC0 ;Configura el pin PC0/A0 como entrada*/
-
-	LDI r16, (1<<PD0)
-	OUT DDRD,r16 ;Configuro el pin PD0 como salida
-
-	LDI r16, (1<<PD1)
-	OUT DDRD,r16 ;Configuro el pin PD1 como salida
-
-	LDI r16, (1<<PD2)
-	OUT DDRD,r16 ;Configuro el pin PD2 como salida
-
-	LDI r16, (1<<PD3)
-	OUT DDRD,r16 ;Configuro el pin PD3 como salida
-
-
-	//MI PROGRA
-	/*LDI R16, 0b0001_1111
+	//si
+	LDI R16, 0b0000_0000
 	OUT DDRC, R16 //Set PORTC as input
 
-	LDI R16, 0b0000_0000//Configura el puerto D (LEDS) como salida
-	OUT DDRD,R16*/
-
-	LDI count, 0b0000
-	OUT DDRD, count
+	LDI R16, 0b1111_1111//Configura el puerto D (LEDS) como salida
+	OUT DDRD,R16
 	
-	LDI count2, 0b0000
-	OUT DDRD, count
+	LDI R16, 0b0001_1111
+	OUT DDRB, R16 //Set PORTB as output
+
+	LDI r16,0b0001_1111 //habilitamos pullup para todos los puertos C (botones)
+	OUT PORTC,r16
 
 	LDI r21,0b0000_0000
 	LDI r22,0b0000_0000
 loop:
 	//PRIMER CONTADOR
-	IN r16, PORTC//PORTC=1
+	IN r16, PINC//PinC presionado o no
 	SBRS r16,PC0 
-	RJMP delaybounce
+	RJMP btn1
 
-	RJMP loop
+	IN r16, PINC//PinC presionado o no
+	SBRS r16,PC1 
+	RJMP btn2
 
-	CPI but1,0b0001//si lee esto, entonces esta presionando el boton de incrementar contador
-	BREQ incr // manda a llamar a la fuincion incr-->incrementa el contador
-	
-	IN but2, PORTC // compara la entrada del pinA, si es el segundo entonces lo asigna a b2
-	//SBRS R16,PC1 ;salta si alguno de los botones no esta presionado
-	//RJMP delaybounce
+	IN r16, PINC//PinC presionado o no
+	SBRS r16,PC2
+	RJMP btn3
 
-	CPI but2,0b0010// decrece el contador porque el boton está presionado
-	BREQ decr// manda a llamar a la funcion decr--> disminuye el contador
+	IN r16, PINC//PinC presionado o no
+	SBRS r16,PC3 
+	RJMP btn4
 
-	//SEGUNDO CONTADOR
-	//SBRS R16,PC0;salta si alguno de los botones no esta presionado
-	//RJMP delaybounce
-	IN but3, PORTC//PORTC=1
-	CPI but3,0b0100//si lee esto, entonces esta presionando el boton de incrementar contador
-	BREQ incr2 // manda a llamar a la fuincion incr-->incrementa el contador
-	
-	IN but4, PORTC // compara la entrada del pinA, si es el segundo entonces lo asigna a b2
-	//SBRS R16,PC1 ;salta si alguno de los botones no esta presionado
-	//RJMP delaybounce
-
-	CPI but4,0b1000// decrece el contador porque el boton está presionado
-	BREQ decr2// manda a llamar a la funcion decr--> disminuye el contador
-
-	//SUMA DE CONTADORES
-	in but5,PORTC
-	CPI but5,0b0001_0000
-	BREQ suma
-
+	IN r16, PINC//PinC presionado o no
+	SBRS r16,PC4
+	RJMP btn5
 
 	RJMP loop//ciclo
+
+btn1:
+	NOP
+	CALL delaybounce
+	SBIS PINC, PC0
+	JMP btn1
+	RJMP incr
+
+btn2:
+	NOP
+	CALL delaybounce
+	SBIS PINC, PC1
+	JMP btn2
+	RJMP decr
+
+btn3:
+	NOP
+	CALL delaybounce
+	SBIS PINC, PC2
+	JMP btn3
+	RJMP incr2
+
+btn4:
+	NOP
+	CALL delaybounce
+	SBIS PINC, PC3
+	JMP btn4
+	RJMP decr2
+
+btn5:
+	NOP
+	CALL delaybounce
+	SBIS PINC, PC4
+	JMP btn5
+	RJMP suma
+
 delaybounce:
 	LDI r16,100
 	delay:
 		DEC r16
 		BRNE delay
-
-	SBIS PINC,PC0
-	RJMP delaybounce
-
-	SBI PIND,PD0
-	RJMP loop
+	RET
 
 incr: //funcion suma
 	INC count // le suma +1 al contador
@@ -146,6 +132,7 @@ incr: //funcion suma
 	RJMP loop//regresa al loop
 
 mostrar:
+	ANDI r21,0b0000_1111
 	LSL r22
 	LSL r22
 	LSL r22
@@ -157,7 +144,7 @@ mostrar:
 
 decr:
 	DEC count// le resta -1 al contador
-	CPI count,0b0000 //compara si el contador es igial a 0
+	CPI count,0xFF //compara si el contador es igial a 0
 	//aqui deberia de añadir un zeroflag
 	BREQ reset//reinicia el contador a 0
 	MOV r21,count
@@ -177,7 +164,7 @@ incr2: //funcion suma
 
 decr2:
 	DEC count2// le resta -1 al contador
-	CPI count2,0b0000 //compara si el contador es igial a 0
+	CPI count2,0xFF //compara si el contador es igial a 0
 	//aqui deberia de añadir un zeroflag
 	BREQ reset//reinicia el contador a 0
 	MOV r22,count2
