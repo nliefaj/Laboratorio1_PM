@@ -163,6 +163,8 @@ decr2:
 	RJMP loop//regresa el ciclo inicial
 
 suma:
+	MOV r21,count
+	MOV r22,count2
 	ADD r21,r22
 	LDI r16,0b0001_0000
 	CP r21,r16
@@ -174,10 +176,8 @@ suma:
 //La siguiente función permite que se muestren los valores de contador 1 y 2 juntos
 mostrar:
 	ANDI r21,0b0000_1111 //revisa que r21 tenga los valores reales del contador 1
-	LSL r22
-	LSL r22
-	LSL r22
-	LSL r22//mueve los bits a la izquierda 4 veces
+	MOV r22,count2
+	SWAP r22//mueve los bits a la izquierda 4 veces
 	OR r21,r22//junta ambos contadores
 	OUT PORTD,r21//muestra ambos contadores
 	//juntar bits de r22 y r21 y as´´i poder hacer un número de 8 bits
